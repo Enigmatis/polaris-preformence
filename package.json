@@ -1,0 +1,32 @@
+{
+  "name": "@enigmatis/polaris-example",
+  "version": "0.0.1",
+  "description": "Example project for how to use polaris-core",
+  "main": "dist/src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc -p tsconfig.json && ts-node src/main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Enigmatis/polaris-example.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Enigmatis/polaris-example/issues"
+  },
+  "homepage": "https://github.com/Enigmatis/polaris-example#readme",
+  "dependencies": {
+    "@enigmatis/polaris-core": "^1.0.2",
+    "@enigmatis/polaris-typeorm": "^1.1.2",
+    "pg": "^7.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.12",
+    "@types/node-fetch": "^2.5.4",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
+  }
+}
