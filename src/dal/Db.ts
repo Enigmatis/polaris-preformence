@@ -23,13 +23,15 @@ export async function initDb(){
     let book2 = new Book('Jurassic Park', author2);
     await bookRepo.save([book1, book2]);
     let book3 = new Book('Harry Potter and the Stone of Smart', author1);
+    connection.manager.queryRunner.data = {requestHeaders:{'realityId': 3}};
     book3.setRealityId(3)
-    connection.manager.queryRunner.data = {requestHeaders:{'realityId': 3}, returnedExtensions:{}};
     await bookRepo.save(book3);
-    book1.setRealityId(3);
     connection.manager.queryRunner.data.returnedExtensions = {};
-    await bookRepo.save(book1);
+    let book4 = new Book(book1.title, author1);
+    book4.setRealityId(3)
+    await bookRepo.save(book4);
     delete connection.manager.queryRunner.data.requestHeaders;
+    delete connection.manager.queryRunner.data.returnedExtensions;
     let bookToBeDeleted = new Book("Im deleted", author2);
     bookToBeDeleted.setDeleted(true);
     await bookRepo.save(bookToBeDeleted);
