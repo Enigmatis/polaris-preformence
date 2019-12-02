@@ -1,36 +1,29 @@
-import {PolarisServer} from '@enigmatis/polaris-core';
+import {PolarisServer, LoggerConfiguration} from '@enigmatis/polaris-core';
 import {typeDefs} from './schema/type-defs';
 import {resolvers} from './schema/resolvers';
 import * as polarisProperties from '../polaris-properties.json';
 import {connection, initConnection} from "./dal/connection-manager'";
-import {initDb} from "./dal/Db";
+import {initializeDatabase} from "./dal/data-initalizer";
+import {loggerConfig} from "./logger";
 
+let server: PolarisServer;
 
-
-let startApp = async ()=>{
+let startApp = async () => {
     await initConnection();
-    await initDb();
-    const server = new PolarisServer({
+    await initializeDatabase();
+    server = new PolarisServer({
         typeDefs,
         resolvers,
         port: polarisProperties.port,
-        applicationLogProperties: {
-            id: polarisProperties.id,
-            name: polarisProperties.name,
-            version: polarisProperties.version,
-            environment: polarisProperties.environment,
-            component: polarisProperties.component,
-        },
+        loggerConfiguration: loggerConfig,
         connection
     });
     await server.start();
 }
 try {
     startApp()
-}
-catch(e)
-{
-    // server.stop();
+} catch (e) {
+    if(server) server.stop();
     console.log(e);
     process.exit(0)
 }
