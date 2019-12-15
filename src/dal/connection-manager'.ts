@@ -13,8 +13,6 @@ let connectionOptions: ConnectionOptions = {
     logging: true
 };
 
-
 export let connection: Connection;
-
-export async function initConnection(){ connection = await createPolarisConnection(connectionOptions, polarisGraphQLLogger.getPolarisLogger() as any);}
+export async function initConnection(){ connection = await createPolarisConnection(connectionOptions, polarisGraphQLLogger.getPolarisLogger());}
 

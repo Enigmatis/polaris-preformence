@@ -37,11 +37,12 @@ async function createExampleData(authors: Author[], books: Book[]) {
     let bookRepo = connection.getRepository(Book);
     await authorRepo.save(authors);
     await bookRepo.save([books[0], books[1]]);
+
     connection.manager.queryRunner.data = {requestHeaders: {'realityId': 3}};
-    // book3.setRealityId(3)
     await bookRepo.save(books[2]);
     connection.manager.queryRunner.data.returnedExtensions = {};
     await bookRepo.save(books[3]);
+
     delete connection.manager.queryRunner.data.requestHeaders;
     delete connection.manager.queryRunner.data.returnedExtensions;
 }

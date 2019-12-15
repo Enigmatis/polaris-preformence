@@ -4,7 +4,7 @@ export const loggerConfig : LoggerConfiguration = {
     loggerLevel: 'debug',
     writeToConsole: true,
     writeFullMessageToConsole: false
-}
+};
 
 const applicationLogProperties = {
     id: 'example',
@@ -18,4 +18,4 @@ export const polarisGraphQLLogger = new PolarisGraphQLLogger({
     loggerLevel: 'debug',
     writeToConsole: true,
     writeFullMessageToConsole: false
-},applicationLogProperties);
+}, applicationLogProperties);
