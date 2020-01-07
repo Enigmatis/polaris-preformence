@@ -13,10 +13,10 @@ let startApp = async () => {
     await server.start();
 };
 
-try {
-    startApp()
-} catch (e) {
-    if(server) server.stop();
+startApp().catch(async e => {
+    if (server) {
+        await server.stop();
+    }
     console.log(e);
-    process.exit(0)
-}
+    process.exit(0);
+});
