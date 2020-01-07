@@ -44,11 +44,15 @@ export const resolvers = {
         },
         updateBook: async (parent: any, args: { title: string, newTitle: string }, context: PolarisGraphQLContext): Promise<Book | undefined> => {
             const bookRepo = connection.getRepository(Book);
-            const result = await bookRepo.find(new PolarisFindManyOptions({where: {title: Like(`%${args.title}%`)}, relations: ['author']}, context) as any);
+            const result = await bookRepo.find(new PolarisFindManyOptions({
+                where: {title: Like(`%${args.title}%`)},
+                relations: ['author']
+            }, context) as any);
             let bookToUpdate = result.length > 0 ? result[0] : undefined;
             if (bookToUpdate) {
                 bookToUpdate.title = args.newTitle;
-                await bookRepo.save(new PolarisSaveOptions(bookToUpdate, context) as any);
+                await bookRepo.update(new PolarisFindOneOptions(bookToUpdate.getId(), context) as any,
+                    {title: args.newTitle});
             }
             return bookToUpdate;
         }

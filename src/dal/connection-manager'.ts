@@ -12,5 +12,8 @@ let connectionOptions: ConnectionOptions = {
 };
 
 export let connection: Connection;
-export async function initConnection(){ connection = await createPolarisConnection(connectionOptions, polarisGraphQLLogger.getPolarisLogger());}
+
+export async function initConnection() {
+    connection = await createPolarisConnection(connectionOptions, polarisGraphQLLogger.getPolarisLogger());
+}
 
