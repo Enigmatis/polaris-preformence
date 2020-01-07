@@ -1,4 +1,4 @@
-import {createPolarisConnection, ConnectionOptions, CommonModel, DataVersion, Connection} from "@enigmatis/polaris-typeorm";
+import {createPolarisConnection, ConnectionOptions, Connection} from "@enigmatis/polaris-typeorm";
 import {polarisGraphQLLogger} from "../logger";
 
 let connectionOptions: ConnectionOptions = {
@@ -6,15 +6,11 @@ let connectionOptions: ConnectionOptions = {
     url: process.env.CONNECTION_STRING || '',
     entities: [
         __dirname + '/*.ts',
-        CommonModel,
-        DataVersion
     ],
-    synchronize: false,
+    synchronize: true,
     logging: true
 };
 
-
 export let connection: Connection;
-
-export async function initConnection(){ connection = await createPolarisConnection(connectionOptions, polarisGraphQLLogger.getPolarisLogger() as any);}
+export async function initConnection(){ connection = await createPolarisConnection(connectionOptions, polarisGraphQLLogger.getPolarisLogger());}
 

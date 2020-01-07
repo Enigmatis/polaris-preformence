@@ -31,6 +31,7 @@ export const typeDefs = `
         realityId: Int!
         firstName: String
         lastName: String
+        fullName: String
         books: [Book]
     }
 `;

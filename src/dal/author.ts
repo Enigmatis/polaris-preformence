@@ -3,11 +3,11 @@ import {Book} from "./book";
 
 @Entity()
 export class Author extends CommonModel{
-    constructor(firstName: string, lastName: string, books?: Book[]) {
+    constructor(firstName: string, lastName: string, books: Book[]) {
         super();
-        firstName ? this.firstName = firstName : {};
-        lastName ? this.lastName = lastName : {};
-        books ? this.books = books : [];
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.books = books;
     }
 
     @Column()
