@@ -11,7 +11,7 @@ export class Author extends CommonModel{
     }
 
     @Column()
-    public firstName: string;
+    firstName: string;
 
     @Column()
     lastName: string;
