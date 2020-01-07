@@ -2,6 +2,7 @@ import {connection} from "./connection-manager'";
 import {Book} from "./book";
 import {Author} from "./author";
 import {polarisGraphQLLogger} from "../logger";
+import {PolarisSaveOptions} from "@enigmatis/polaris-typeorm";
 
 async function deleteTables() {
     const tables = ['book', 'author', 'dataVersion'];
@@ -18,8 +19,8 @@ async function deleteTables() {
 
 function getAuthors(): Author[] {
     return [
-        new Author("J.K.", "Rowling"),
-        new Author("Michael", "Crichton"),
+        new Author("J.K.", "Rowling", []),
+        new Author("Michael", "Crichton", []),
     ];
 }
 
@@ -35,16 +36,9 @@ function getBooks(authors: Author[]): Book[] {
 async function createExampleData(authors: Author[], books: Book[]) {
     let authorRepo = connection.getRepository(Author);
     let bookRepo = connection.getRepository(Book);
-    await authorRepo.save(authors);
-    await bookRepo.save([books[0], books[1]]);
-
-    connection.manager.queryRunner.data = {requestHeaders: {'realityId': 3}};
-    await bookRepo.save(books[2]);
-    connection.manager.queryRunner.data.returnedExtensions = {};
-    await bookRepo.save(books[3]);
-
-    delete connection.manager.queryRunner.data.requestHeaders;
-    delete connection.manager.queryRunner.data.returnedExtensions;
+    await authorRepo.save(new PolarisSaveOptions(authors, {} as any) as any);
+    await bookRepo.save(new PolarisSaveOptions([books[0], books[1], books[3]],{} as any) as any);
+    await bookRepo.save(new PolarisSaveOptions(books[2], {requestHeaders: {'realityId': 3}} as any) as any);
 }
 
 export async function initializeDatabase(){
