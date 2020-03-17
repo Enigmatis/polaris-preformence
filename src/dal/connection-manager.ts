@@ -1,5 +1,5 @@
 import {ConnectionOptions, createPolarisConnection, PolarisConnection} from "@enigmatis/polaris-core";
-import {polarisGraphQLLogger} from "../logger";
+import {polarisGraphQLLogger} from "../utils/logger";
 
 let connectionOptions: ConnectionOptions = {
     type: "postgres",

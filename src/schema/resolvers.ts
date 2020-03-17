@@ -2,7 +2,7 @@ import {connection} from "../dal/connection-manager";
 import {Like, PolarisError, PolarisGraphQLContext} from "@enigmatis/polaris-core"
 import {Book} from "../dal/entities/book";
 import {Author} from "../dal/entities/author";
-import {polarisGraphQLLogger} from "../logger";
+import {polarisGraphQLLogger} from "../utils/logger";
 
 export const resolvers = {
     Query: {
@@ -14,7 +14,7 @@ export const resolvers = {
             polarisGraphQLLogger.debug("I'm the resolver of all books", context);
             return await connection.getRepository(Book).find(context, {relations: ['author']});
         },
-        bookByTitle: (
+        booksByTitle: (
             parent: any,
             args: { title: string },
             context: PolarisGraphQLContext

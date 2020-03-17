@@ -1,7 +1,7 @@
 export const typeDefs = `
     type Query {
         allBooks: [Book]!
-        bookByTitle(title: String!): [Book]!
+        booksByTitle(title: String!): [Book]!
     }
 
     type Mutation {
