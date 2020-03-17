@@ -1,12 +1,14 @@
 export const typeDefs = `
     type Query {
         allBooks: [Book]!
-        booksByTitle(title: String!): [Book]!
+        booksByPartialTitle(title: String!): [Book]!
+        allAuthors: [Author]!
     }
 
     type Mutation {
         createBook(title: String!, authorId: String!): Book
         updateBook(id: String!, newTitle: String!): Book
+        deleteBook(id: String!): Book
     }
 
     type Book implements RepositoryEntity {

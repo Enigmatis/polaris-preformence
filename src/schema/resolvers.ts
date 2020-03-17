@@ -14,7 +14,7 @@ export const resolvers = {
             polarisGraphQLLogger.debug("I'm the resolver of all books", context);
             return await connection.getRepository(Book).find(context, {relations: ['author']});
         },
-        booksByTitle: (
+        booksByPartialTitle: (
             parent: any,
             args: { title: string },
             context: PolarisGraphQLContext
@@ -23,7 +23,14 @@ export const resolvers = {
                 where: {title: Like(`%${args.title}%`)},
                 relations: ['author'],
             });
-        }
+        },
+        allAuthors: async (
+            parent: any,
+            args: any,
+            context: PolarisGraphQLContext
+        ): Promise<Author[]> => {
+            return await connection.getRepository(Author).find(context, {relations: ['books']});
+        },
     },
     Mutation: {
         createBook: async (
@@ -48,7 +55,10 @@ export const resolvers = {
             context: PolarisGraphQLContext
         ): Promise<Book> => {
             const bookRepo = connection.getRepository(Book);
-            const bookToUpdate: Book | undefined = await bookRepo.findOne(context, {where: {id: args.id}});
+            const bookToUpdate: Book | undefined = await bookRepo.findOne(context, {
+                where: {id: args.id},
+                relations: ['author']
+            });
             if (bookToUpdate) {
                 bookToUpdate.title = args.newTitle;
                 await bookRepo.update(context, bookToUpdate.getId(), {title: args.newTitle});
@@ -56,11 +66,28 @@ export const resolvers = {
             } else {
                 throw new PolarisError("Could not find book with the requested id!", 400);
             }
-        }
+        },
+        deleteBook: async (
+            parent: any,
+            args: { id: string },
+            context: PolarisGraphQLContext
+        ): Promise<Book> => {
+            const bookRepo = connection.getRepository(Book);
+            const bookToDelete: Book | undefined = await bookRepo.findOne(context, {
+                where: {id: args.id},
+                relations: ['author']
+            });
+            if (bookToDelete) {
+                await bookRepo.delete(context, bookToDelete.getId());
+                return bookToDelete;
+            } else {
+                throw new PolarisError("Could not find book with the requested id!", 400);
+            }
+        },
     },
     Author: {
         fullName(author: Author) {
             return `${author.firstName} ${author.lastName}`;
-        }
+        },
     }
 };
