@@ -1,5 +1,4 @@
-import {connection} from "../dal/connection-manager";
-import {Like, PolarisError, PolarisGraphQLContext} from "@enigmatis/polaris-core"
+import {getPolarisConnectionManager, Like, PolarisError, PolarisGraphQLContext} from "@enigmatis/polaris-core"
 import {Book} from "../dal/entities/book";
 import {Author} from "../dal/entities/author";
 import {polarisGraphQLLogger} from "../utils/logger";
@@ -11,14 +10,16 @@ export const resolvers = {
             args: any,
             context: PolarisGraphQLContext
         ): Promise<Book[]> => {
+            const connection = getPolarisConnectionManager().get();
             polarisGraphQLLogger.debug("I'm the resolver of all books", context);
-            return await connection.getRepository(Book).find(context, {relations: ['author']});
+            return connection.getRepository(Book).find(context, {relations: ['author']});
         },
         booksByPartialTitle: (
             parent: any,
             args: { title: string },
             context: PolarisGraphQLContext
         ): Promise<Book[]> => {
+            const connection = getPolarisConnectionManager().get();
             return connection.getRepository(Book).find(context, {
                 where: {title: Like(`%${args.title}%`)},
                 relations: ['author'],
@@ -29,7 +30,9 @@ export const resolvers = {
             args: any,
             context: PolarisGraphQLContext
         ): Promise<Author[]> => {
-            return await connection.getRepository(Author).find(context, {relations: ['books']});
+            const connection = getPolarisConnectionManager().get();
+            const authorRepo = connection.getRepository(Author);
+            return authorRepo.find(context, {relations: ['books']});
         },
     },
     Mutation: {
@@ -38,6 +41,7 @@ export const resolvers = {
             args: { authorId: string, title: string },
             context: PolarisGraphQLContext
         ): Promise<Book> => {
+            const connection = getPolarisConnectionManager().get();
             const authorRepo = connection.getRepository(Author);
             const bookRepo = connection.getRepository(Book);
             const author: Author | undefined = await authorRepo.findOne(context, {where: {id: args.authorId}});
@@ -54,6 +58,7 @@ export const resolvers = {
             args: { id: string, newTitle: string },
             context: PolarisGraphQLContext
         ): Promise<Book> => {
+            const connection = getPolarisConnectionManager().get();
             const bookRepo = connection.getRepository(Book);
             const bookToUpdate: Book | undefined = await bookRepo.findOne(context, {
                 where: {id: args.id},
@@ -72,6 +77,7 @@ export const resolvers = {
             args: { id: string },
             context: PolarisGraphQLContext
         ): Promise<Book> => {
+            const connection = getPolarisConnectionManager().get();
             const bookRepo = connection.getRepository(Book);
             const bookToDelete: Book | undefined = await bookRepo.findOne(context, {
                 where: {id: args.id},

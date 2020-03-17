@@ -1,8 +1,9 @@
-import {connection} from "./connection-manager";
 import {Book} from "./entities/book";
 import {Author} from "./entities/author";
+import {getPolarisConnectionManager} from "@enigmatis/polaris-core";
 
 async function deleteTables() {
+    const connection = getPolarisConnectionManager().get();
     const tables = ['book', 'author', 'dataVersion'];
     for (const table of tables) {
         if (connection) {
@@ -28,6 +29,7 @@ function getBooks(authors: Author[]): Book[] {
 }
 
 async function createExampleData(authors: Author[], books: Book[]) {
+    const connection = getPolarisConnectionManager().get();
     let authorRepo = connection.getRepository(Author);
     let bookRepo = connection.getRepository(Book);
     await authorRepo.save({requestHeaders: {realityId: 0}} as any, authors);
@@ -36,6 +38,7 @@ async function createExampleData(authors: Author[], books: Book[]) {
 }
 
 export async function initializeDatabase() {
+    const connection = getPolarisConnectionManager().get();
     await deleteTables();
     await connection.synchronize();
     const authors: Author[] = getAuthors();
