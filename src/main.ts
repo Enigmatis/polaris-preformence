@@ -4,12 +4,14 @@ import {resolvers} from './schema/resolvers';
 import * as polarisProperties from '../resources/polaris-properties.json';
 import {connection, initConnection} from "./dal/connection-manager";
 import {initializeDatabase} from "./dal/data-initalizer";
+import {realitiesHolder} from "./utils/realities-holder";
 
 let server: PolarisServer = new PolarisServer({
     typeDefs,
     resolvers,
     port: polarisProperties.port,
-    connection
+    connection,
+    supportedRealities: realitiesHolder,
 });
 
 let startApp = async () => {
