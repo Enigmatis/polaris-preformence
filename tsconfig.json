@@ -7,12 +7,10 @@
     "strict": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
     "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
-    "typeRoots": [
-      "src/type-declarations"
-    ],
     "types": [
       "node"
     ],

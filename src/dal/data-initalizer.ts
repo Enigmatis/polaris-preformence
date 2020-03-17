@@ -1,18 +1,13 @@
-import {connection} from "./connection-manager'";
-import {Book} from "./book";
-import {Author} from "./author";
-import {polarisGraphQLLogger} from "../logger";
-import {PolarisSaveOptions} from "@enigmatis/polaris-typeorm";
+import {Book} from "./entities/book";
+import {Author} from "./entities/author";
+import {getPolarisConnectionManager} from "@enigmatis/polaris-core";
 
 async function deleteTables() {
+    const connection = getPolarisConnectionManager().get();
     const tables = ['book', 'author', 'dataVersion'];
     for (const table of tables) {
         if (connection) {
-            try {
-                await connection.getRepository(table).query('DELETE FROM "' + table + '";');
-            } catch (e) {
-                polarisGraphQLLogger.debug("Couldn't delete table (might never existed)");
-            }
+            await connection.getRepository(table).query('DELETE FROM "' + table + '";');
         }
     }
 }
@@ -34,14 +29,16 @@ function getBooks(authors: Author[]): Book[] {
 }
 
 async function createExampleData(authors: Author[], books: Book[]) {
+    const connection = getPolarisConnectionManager().get();
     let authorRepo = connection.getRepository(Author);
     let bookRepo = connection.getRepository(Book);
-    await authorRepo.save(new PolarisSaveOptions(authors, {} as any) as any);
-    await bookRepo.save(new PolarisSaveOptions([books[0], books[1], books[3]],{} as any) as any);
-    await bookRepo.save(new PolarisSaveOptions(books[2], {requestHeaders: {'realityId': 3}} as any) as any);
+    await authorRepo.save({requestHeaders: {realityId: 0}} as any, authors);
+    await bookRepo.save({requestHeaders: {realityId: 0}} as any, [books[0], books[1], books[3]]);
+    await bookRepo.save({requestHeaders: {realityId: 3}} as any, books[2]);
 }
 
-export async function initializeDatabase(){
+export async function initializeDatabase() {
+    const connection = getPolarisConnectionManager().get();
     await deleteTables();
     await connection.synchronize();
     const authors: Author[] = getAuthors();
