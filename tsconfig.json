@@ -12,7 +12,8 @@
     "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
     "types": [
-      "node"
+      "node",
+      "graphql-depth-limit"
     ],
     "declaration": true,
     "lib": [
