@@ -6,6 +6,7 @@ import {initConnection} from "./dal/connection-manager";
 import {initializeDatabase} from "./dal/data-initalizer";
 import {realitiesHolder} from "./utils/realities-holder";
 import {healthCheck} from "./utils/health-check";
+import * as depthLimit from "graphql-depth-limit";
 
 let server: PolarisServer;
 
@@ -18,6 +19,7 @@ let startApp = async () => {
         port: polarisProperties.port,
         connection: getPolarisConnectionManager().get(),
         supportedRealities: realitiesHolder,
+        validationRules: [depthLimit(2)]
     });
     app.get('/health', healthCheck);
     await server.start();
