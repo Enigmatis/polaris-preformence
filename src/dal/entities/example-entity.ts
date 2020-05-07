@@ -7,30 +7,30 @@ import {ComplexEntity3} from "./complex-entity3";
 export class ExampleEntity extends CommonModel {
     @Column()
     public classification: string;
-    @Column()
+    @Column(type => ComplexEntity1)
     public complexEntity11: ComplexEntity1;
-    @Column()
+    @Column(type => ComplexEntity1)
     public complexEntity12: ComplexEntity1;
-    @Column()
+    @Column(type => ComplexEntity1)
     public complexEntity13: ComplexEntity1;
-    @Column()
+    @Column(type => ComplexEntity2)
     public complexEntity21: ComplexEntity2;
-    @Column()
+    @Column(type => ComplexEntity2)
     public complexEntity22: ComplexEntity2;
-    @Column()
+    @Column(type => ComplexEntity2)
     public complexEntity23: ComplexEntity2;
-    @Column()
+    @Column(type => ComplexEntity3)
     public complexEntity31: ComplexEntity3;
-    @Column()
+    @Column(type => ComplexEntity3)
     public complexEntity32: ComplexEntity3;
-    @Column()
+    @Column(type => ComplexEntity3)
     public complexEntity33: ComplexEntity3;
     @Column()
     public createdBy: string;
     @Column()
     public lastUpdatedBy: string;
     @Column()
-    public realityId: string;
+    public realityId: number;
     @Column()
     public creationTime: Date;
     @Column()
@@ -60,15 +60,24 @@ export class ExampleEntity extends CommonModel {
     @Column()
     public secretGroups: string[];
     @PrimaryGeneratedColumn("uuid")
-    protected id!: Long;
+    protected id!: string;
 
     public constructor(classification: string, field1: string, field2: string, field3: string, field4: string, field5: string,
                        field6: string, field7: string, field8: string, field9: string, field10: string,
                        complexEntity11: ComplexEntity1, complexEntity12: ComplexEntity1, complexEntity13: ComplexEntity1,
                        complexEntity21: ComplexEntity2, complexEntity22: ComplexEntity2, complexEntity23: ComplexEntity2,
-                       complexEntity31: ComplexEntity3, complexEntity32: ComplexEntity3, complexEntity33: ComplexEntity3) {
+                       complexEntity31: ComplexEntity3, complexEntity32: ComplexEntity3, complexEntity33: ComplexEntity3,
+                       realityId: number, createdBy: string, lastUpdatedBy: string, isDeleted: boolean, creationTime: Date,
+                       lastUpdateTime: Date, secretGroups: string[]) {
         super();
         this.classification = classification;
+        this.realityId = realityId;
+        this.secretGroups = secretGroups;
+        this.creationTime = creationTime;
+        this.lastUpdateTime = lastUpdateTime;
+        this.createdBy = createdBy;
+        this.lastUpdatedBy = lastUpdatedBy;
+        this.isDeleted = isDeleted;
         this.field1 = field1;
         this.field2 = field2;
         this.field3 = field3;
@@ -90,7 +99,7 @@ export class ExampleEntity extends CommonModel {
         this.complexEntity33 = complexEntity33;
     }
 
-    public getId(): Long {
+    public getId(): string {
         return this.id;
     }
 }

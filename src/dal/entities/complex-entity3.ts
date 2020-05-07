@@ -1,7 +1,6 @@
-import {Column, CommonModel, Entity, PrimaryGeneratedColumn} from "@enigmatis/polaris-core";
+import {Column} from "@enigmatis/polaris-core";
 
-@Entity()
-export class ComplexEntity3 extends CommonModel {
+export class ComplexEntity3 {
     @Column()
     public field1: string;
     @Column()
@@ -20,12 +19,9 @@ export class ComplexEntity3 extends CommonModel {
     public field8: string;
     @Column()
     public field9: string;
-    @PrimaryGeneratedColumn("uuid")
-    protected id!: string;
 
     public constructor(field1: string, field2: string, field3: string, field4: string, field5: string, field6: string,
                        field7: string, field8: string, field9: string) {
-        super();
         this.field1 = field1;
         this.field2 = field2;
         this.field3 = field3;
@@ -35,9 +31,5 @@ export class ComplexEntity3 extends CommonModel {
         this.field7 = field7;
         this.field8 = field8;
         this.field9 = field9;
-    }
-
-    public getId(): string {
-        return this.id;
     }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "@enigmatis/polaris-preformence",
+  "name": "@enigmatis/polaris-performance",
   "version": "0.0.1",
-  "description": "Preformence project for doing preformence testing",
+  "description": "Performance project for doing performance testing",
   "main": "dist/src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
