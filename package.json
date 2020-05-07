@@ -1,7 +1,7 @@
 {
-  "name": "@enigmatis/polaris-example",
+  "name": "@enigmatis/polaris-preformence",
   "version": "0.0.1",
-  "description": "Example project for how to use polaris-core",
+  "description": "Preformence project for doing preformence testing",
   "main": "dist/src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Enigmatis/polaris-example.git"
+    "url": "git+https://github.com/Enigmatis/polaris-preformence.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Enigmatis/polaris-example/issues"
+    "url": "https://github.com/Enigmatis/polaris-preformence/issues"
   },
-  "homepage": "https://github.com/Enigmatis/polaris-example#readme",
+  "homepage": "https://github.com/Enigmatis/polaris-preformence#readme",
   "dependencies": {
     "@enigmatis/polaris-core": "^2.0.0-beta.9",
     "@types/graphql-depth-limit": "^1.1.2",

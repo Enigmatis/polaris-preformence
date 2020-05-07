@@ -12,7 +12,7 @@ let server: PolarisServer;
 
 let startApp = async () => {
     await initConnection();
-    await initializeDatabase();
+    // await initializeDatabase();
     server = new PolarisServer({
         typeDefs,
         resolvers,

@@ -1,39 +1,80 @@
 export const typeDefs = `
+    type ComplexEntity1 {
+      field1: String
+      field2: String
+      field3: String
+      innerComplexEntity1: InnerComplexEntity
+      innerComplexEntity2: InnerComplexEntity
+    }
+    
+    type ComplexEntity2 {
+      field1: String
+      field2: String
+      field3: String
+      field4: String
+      field5: String
+      field6: String
+    }
+    
+    type ComplexEntity3 {
+      field1: String
+      field2: String
+      field3: String
+      field4: String
+      field5: String
+      field6: String
+      field7: String
+      field8: String
+      field9: String
+    }
+    
+    type ExampleEntity {
+      classification: String
+      complexEntity11: ComplexEntity1
+      complexEntity12: ComplexEntity1
+      complexEntity13: ComplexEntity1
+      complexEntity21: ComplexEntity2
+      complexEntity22: ComplexEntity2
+      complexEntity23: ComplexEntity2
+      complexEntity31: ComplexEntity3
+      complexEntity32: ComplexEntity3
+      complexEntity33: ComplexEntity3
+      createdBy: String
+      creationTime: ZonedDateTime
+      isDeleted: Boolean
+      field1: String
+      field10: String
+      field2: String
+      field3: String
+      field4: String
+      field5: String
+      field6: String
+      field7: String
+      field8: String
+      field9: String
+      id: Long
+      lastUpdateTime: ZonedDateTime
+      lastUpdatedBy: String
+      realityId: String
+      secretGroups: [String]
+    }
+    
+    type InnerComplexEntity {
+      field1: String
+      field2: String
+      field3: String
+    }
+    
+    scalar Long
+    
+    type PageInfo {
+      hasNextPage: Boolean!
+      hasPreviousPage: Boolean!
+      startCursor: String
+      endCursor: String
+    }
+    
     type Query {
-        allBooks: [Book]!
-        booksByPartialTitle(title: String!): [Book]!
-        allAuthors: [Author]!
-    }
-
-    type Mutation {
-        createBook(title: String!, authorId: String!): Book
-        updateBook(id: String!, newTitle: String!): Book
-        deleteBook(id: String!): Book
-    }
-
-    type Book implements RepositoryEntity {
-        id: String!
-        deleted: Boolean!
-        createdBy: String!
-        creationTime: DateTime!
-        lastUpdatedBy: String
-        lastUpdateTime: DateTime
-        realityId: Int!
-        title: String
-        author: Author
-    }
-
-    type Author implements RepositoryEntity {
-        id: String!
-        deleted: Boolean!
-        createdBy: String!
-        creationTime: DateTime!
-        lastUpdatedBy: String
-        lastUpdateTime: DateTime
-        realityId: Int!
-        firstName: String
-        lastName: String
-        fullName: String
-        books: [Book]
+      exampleEntities: [ExampleEntity]
     }
 `;
