@@ -28,7 +28,7 @@ export const typeDefs = `
       field9: String
     }
     
-    type ExampleEntity {
+    type ExampleEntity implements RepositoryEntity {
       classification: String
       complexEntity11: ComplexEntity1
       complexEntity12: ComplexEntity1
@@ -41,7 +41,7 @@ export const typeDefs = `
       complexEntity33: ComplexEntity3
       createdBy: String
       creationDate: DateTime
-      isDeleted: Boolean
+      deleted: Boolean
       field1: String
       field10: String
       field2: String
@@ -56,7 +56,6 @@ export const typeDefs = `
       lastUpdateDate: DateTime
       lastUpdatedBy: String
       realityId: String
-      secretGroups: [String]
     }
     
     type InnerComplexEntity {

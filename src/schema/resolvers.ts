@@ -7,10 +7,11 @@ export const resolvers = {
             parent: any,
             args: any,
             context: PolarisGraphQLContext
-        ): Promise<exampleentity[]> => {
+        ): Promise<any[]> => {
             const connection = getPolarisConnectionManager().get();
-            const s = connection.getRepository(exampleentity).find(context);
+            const s = await connection.getRepository(exampleentity).find(context, {take: 20});
             return s;
+            // return [{field1:"hi"}];
         }
     },
 };
