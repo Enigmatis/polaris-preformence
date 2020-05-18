@@ -1,5 +1,5 @@
 import {getPolarisConnectionManager, PolarisGraphQLContext} from "@enigmatis/polaris-core"
-import {ExampleEntity} from "../dal/entities/example-entity";
+import {exampleentity} from "../dal/entities/exampleentity";
 
 export const resolvers = {
     Query: {
@@ -7,9 +7,10 @@ export const resolvers = {
             parent: any,
             args: any,
             context: PolarisGraphQLContext
-        ): Promise<ExampleEntity[]> => {
+        ): Promise<exampleentity[]> => {
             const connection = getPolarisConnectionManager().get();
-            return connection.getRepository(ExampleEntity).find(context);
+            const s = connection.getRepository(exampleentity).find(context);
+            return s;
         }
     },
 };

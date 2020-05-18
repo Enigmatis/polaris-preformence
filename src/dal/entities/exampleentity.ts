@@ -3,8 +3,8 @@ import {ComplexEntity1} from "./complex-entity1";
 import {ComplexEntity2} from "./complex-entity2";
 import {ComplexEntity3} from "./complex-entity3";
 
-@Entity()
-export class ExampleEntity extends CommonModel {
+@Entity({name: 'exampleentity'})
+export class exampleentity extends CommonModel {
     @Column()
     public classification: string;
     @Column(type => ComplexEntity1)
@@ -25,18 +25,16 @@ export class ExampleEntity extends CommonModel {
     public complexEntity32: ComplexEntity3;
     @Column(type => ComplexEntity3)
     public complexEntity33: ComplexEntity3;
-    @Column()
-    public createdBy: string;
-    @Column()
-    public lastUpdatedBy: string;
-    @Column()
-    public realityId: number;
-    @Column()
-    public creationTime: Date;
-    @Column()
-    public lastUpdateTime: Date;
-    @Column()
-    public isDeleted: boolean;
+    // @Column()
+    // public createdBy: string;
+    // @Column()
+    // public lastUpdatedBy: string;
+    // @Column()
+    // public realityId: number;
+    // @Column({name: 'creationdate'})
+    // public creationDate: Date;
+    // @Column({name: 'lastupdatedate'})
+    // public lastUpdateDate: Date;
     @Column()
     public field1: string;
     @Column()
@@ -57,8 +55,6 @@ export class ExampleEntity extends CommonModel {
     public field9: string;
     @Column()
     public field10: string;
-    @Column()
-    public secretGroups: string[];
     @PrimaryGeneratedColumn("uuid")
     protected id!: string;
 
@@ -67,17 +63,14 @@ export class ExampleEntity extends CommonModel {
                        complexEntity11: ComplexEntity1, complexEntity12: ComplexEntity1, complexEntity13: ComplexEntity1,
                        complexEntity21: ComplexEntity2, complexEntity22: ComplexEntity2, complexEntity23: ComplexEntity2,
                        complexEntity31: ComplexEntity3, complexEntity32: ComplexEntity3, complexEntity33: ComplexEntity3,
-                       realityId: number, createdBy: string, lastUpdatedBy: string, isDeleted: boolean, creationTime: Date,
-                       lastUpdateTime: Date, secretGroups: string[]) {
+                       realityId: number, createdBy: string, lastUpdatedBy: string, creationDate: Date, lastUpdateDate: Date) {
         super();
         this.classification = classification;
-        this.realityId = realityId;
-        this.secretGroups = secretGroups;
-        this.creationTime = creationTime;
-        this.lastUpdateTime = lastUpdateTime;
-        this.createdBy = createdBy;
-        this.lastUpdatedBy = lastUpdatedBy;
-        this.isDeleted = isDeleted;
+        // this.realityId = realityId;
+        // this.creationDate = creationDate;
+        // this.lastUpdateDate = lastUpdateDate;
+        // this.createdBy = createdBy;
+        // this.lastUpdatedBy = lastUpdatedBy;
         this.field1 = field1;
         this.field2 = field2;
         this.field3 = field3;

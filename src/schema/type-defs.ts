@@ -40,7 +40,7 @@ export const typeDefs = `
       complexEntity32: ComplexEntity3
       complexEntity33: ComplexEntity3
       createdBy: String
-      creationTime: ZonedDateTime
+      creationDate: DateTime
       isDeleted: Boolean
       field1: String
       field10: String
@@ -53,7 +53,7 @@ export const typeDefs = `
       field8: String
       field9: String
       id: Long
-      lastUpdateTime: ZonedDateTime
+      lastUpdateDate: DateTime
       lastUpdatedBy: String
       realityId: String
       secretGroups: [String]
