@@ -7,10 +7,12 @@ let connectionOptions: ConnectionOptions = {
     url: process.env.CONNECTION_STRING || '',
     entities: [__dirname + '/entities/*.{ts,js}'],
     logging: true,
-    schema: 'mgf-performance',
+    // dropSchema: true,
+    // synchronize: true,
+    schema: 'vulcan',
     namingStrategy: new DbTablesNamingStrategy()
 };
 
 export async function initConnection() {
-    await createPolarisConnection(connectionOptions, polarisGraphQLLogger);
+    await createPolarisConnection(connectionOptions, polarisGraphQLLogger as any);
 }

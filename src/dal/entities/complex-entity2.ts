@@ -1,4 +1,5 @@
 import {Column} from "@enigmatis/polaris-core";
+import {Generator} from "../../utils/generator";
 
 export class ComplexEntity2 {
     @Column()
@@ -14,12 +15,12 @@ export class ComplexEntity2 {
     @Column()
     public field6: string;
 
-    public constructor(field1: string, field2: string, field3: string, field4: string, field5: string, field6: string) {
-        this.field1 = field1;
-        this.field2 = field2;
-        this.field3 = field3;
-        this.field4 = field4;
-        this.field5 = field5;
-        this.field6 = field6;
+    public constructor() {
+        this.field1 = Generator.GetRandomString();
+        this.field2 = Generator.GetRandomString();
+        this.field3 = Generator.GetRandomString();
+        this.field4 = Generator.GetRandomString();
+        this.field5 = Generator.GetRandomString();
+        this.field6 = Generator.GetRandomString();
     }
 }

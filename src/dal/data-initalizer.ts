@@ -1,17 +1,10 @@
-// import {getPolarisConnectionManager} from "@enigmatis/polaris-core";
-//
-// async function deleteTables() {
-//     const connection = getPolarisConnectionManager().get();
-//     const tables = ['book', 'author', 'dataVersion'];
-//     for (const table of tables) {
-//         if (connection) {
-//             await connection.getRepository(table).query('DELETE FROM "' + table + '";');
-//         }
-//     }
-// }
-//
-// export async function initializeDatabase() {
-//     const connection = getPolarisConnectionManager().get();
-//     await deleteTables();
-//     await connection.synchronize();
-// }
+import {ExampleEntity} from "./entities/example-entity";
+
+export async function initializeExampleData(count: number): Promise<ExampleEntity[]> {
+    let exampleEntities = [];
+    for (let i = 0; i < count; i++) {
+        exampleEntities.push(new ExampleEntity());
+    }
+
+    return exampleEntities;
+}

@@ -29,7 +29,6 @@ export const typeDefs = `
     }
     
     type ExampleEntity implements RepositoryEntity {
-      classification: String
       complexEntity11: ComplexEntity1
       complexEntity12: ComplexEntity1
       complexEntity13: ComplexEntity1
@@ -39,8 +38,6 @@ export const typeDefs = `
       complexEntity31: ComplexEntity3
       complexEntity32: ComplexEntity3
       complexEntity33: ComplexEntity3
-      createdBy: String
-      creationDate: DateTime
       deleted: Boolean
       field1: String
       field10: String
@@ -52,10 +49,12 @@ export const typeDefs = `
       field7: String
       field8: String
       field9: String
-      id: Long
-      lastUpdateDate: DateTime
+      id: String!
+      createdBy: String!
+      creationTime: DateTime!
       lastUpdatedBy: String
-      realityId: String
+      lastUpdateTime: DateTime
+      realityId: Int!
     }
     
     type InnerComplexEntity {
@@ -63,8 +62,6 @@ export const typeDefs = `
       field2: String
       field3: String
     }
-    
-    scalar Long
     
     type PageInfo {
       hasNextPage: Boolean!
@@ -75,5 +72,9 @@ export const typeDefs = `
     
     type Query {
       exampleEntities: [ExampleEntity]
+    }
+    
+    type Mutation {
+      addExampleEntities(count: Int!): Boolean
     }
 `;
